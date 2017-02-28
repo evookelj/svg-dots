@@ -12,6 +12,8 @@ var circ = function(e) {
 	var y1;
 
 	if (svg.hasChildNodes()) {
+
+		//draw line from last child
 		var last = svg.lastChild;
 		x1 = last.getAttribute("cx");
 		y1 = last.getAttribute("cy");
@@ -24,6 +26,7 @@ var circ = function(e) {
 		l.setAttribute("stroke", "black");
 		svg.appendChild(l);
 
+		//redraw last circle so that line isnt on top
 		var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 		c.setAttribute("cx", x1);
 		c.setAttribute("cy", y1);
@@ -32,11 +35,9 @@ var circ = function(e) {
 		c.setAttribute("stroke", "black");
 		svg.appendChild(c);
 
-	} else {
-		x1 = Math.random() * svg.width;
-		y1 = Math.random() * svg.height;
 	}
 
+	//add text counting
 	var t = document.createElementNS("http://www.w3.org/2000/svg", "text");
 	t.setAttribute("x", e.offsetX+20);
 	t.setAttribute("y", e.offsetY);
@@ -44,6 +45,7 @@ var circ = function(e) {
 	t.innerHTML = svg.childNodes.length/4;
 	svg.appendChild(t);
 
+	//draw new circle
 	var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 	c.setAttribute("cx", e.offsetX);
 	c.setAttribute("cy", e.offsetY);
@@ -53,6 +55,6 @@ var circ = function(e) {
 	svg.appendChild(c);
 }
 
-clearScreen();
+clearScreen(); //for some reason this is needed w counting childnodes?
 svg.addEventListener('click', circ);
 clear.addEventListener('click', clearScreen);
