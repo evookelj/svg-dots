@@ -11,12 +11,17 @@ var circ = function(e) {
 	var x1;
 	var y1;
 
+
 	if (svg.hasChildNodes()) {
 
 		//draw line from last child
 		var last = svg.lastChild;
 		x1 = last.getAttribute("cx");
 		y1 = last.getAttribute("cy");
+
+		//get rid of the last one BC overwrite
+		svg.removeChild(svg.lastChild);
+
 		var l = document.createElementNS("http://www.w3.org/2000/svg", "line");
 		l.setAttribute("x1", x1.toString() );
 		l.setAttribute("y1", y1.toString() );
@@ -42,7 +47,7 @@ var circ = function(e) {
 	t.setAttribute("x", e.offsetX+20);
 	t.setAttribute("y", e.offsetY);
 	t.setAttribute("fill", "red");
-	t.innerHTML = svg.childNodes.length/4;
+	t.innerHTML = svg.childNodes.length/3;
 	svg.appendChild(t);
 
 	//draw new circle
